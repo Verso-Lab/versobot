@@ -21,7 +21,7 @@ SOURCE_TEXT_OPTIONS = [
 SOURCE_TEXT_CAPTIONS = [
     "The research paper that introduced the machine learning model architecture behind ChatGPT and others. [Read the document](https://arxiv.org/html/1706.03762v7). :blue-background[5,824 words]",
     "Dr. Anthony Fauci's ten-hour closed-door testimony in front of the COVID Select Subcommittee in January 2024. [Read the document](https://oversight.house.gov/wp-content/uploads/2024/05/Fauci-Part-1-Transcript.pdf). :blue-background[58,893 words]",
-    "A representative sample of 2022 U.S. vehicle collisions from the National Highway and Transit Safety Administration. [Read the document](https://www.sec.gov/Archives/edgar/data/1024401/000102440101500010/ene10-k.txt). :blue-background[53,955 records]"
+    "A representative sample of 2022 U.S. vehicle collisions from the National Highway and Transit Safety Administration. [Read about the data](https://www.nhtsa.gov/crash-data-systems/crash-report-sampling-system). :blue-background[53,955 records]"
 ]
 
 ASSISTANTS = {
