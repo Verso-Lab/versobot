@@ -1,0 +1,96 @@
+import streamlit as st
+import re
+
+from openai import OpenAI
+from openai.types.beta.assistant_stream_event import ThreadMessageDelta
+from openai.types.beta.threads.text_delta_block import TextDeltaBlock
+
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+
+
+def versobot(assistant_id, initial_message):
+    client = OpenAI(api_key=OPENAI_API_KEY)
+
+    # Create a new thread
+    thread = client.beta.threads.create()
+    thread_id = thread.id
+    
+    # Initialize session state to store conversation history locally to display on UI
+    if "chat_history" not in st.session_state or st.session_state.chat_history == []:
+        st.session_state.chat_history = [{"role": "assistant",
+                                          "content": initial_message}]
+
+    # Display chat history on the UI
+    for message in st.session_state.chat_history:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+    
+    # Textbox and streaming process
+    if user_query := st.chat_input("Chat with GPT-4o"):
+        
+        # Display the user's query
+        with st.chat_message("user"):
+            st.markdown(user_query)
+
+        # Store the user's query into the history
+        st.session_state.chat_history.append({"role": "user",
+                                            "content": user_query})
+
+        # Add user query to the thread
+        client.beta.threads.messages.create(
+            thread_id=thread_id,
+            role="user",
+            content=user_query
+        )
+
+        # Stream the assistant's reply
+        with st.chat_message("assistant"):
+            stream = client.beta.threads.runs.create(
+                thread_id=thread_id,
+                assistant_id=assistant_id,
+                stream=True
+            )
+
+            # Empty container to display the assistant's reply
+            assistant_reply_box = st.empty()
+
+            # A blank string to store the assistant's reply
+            assistant_reply = ""
+
+        # Add a spinner
+        with st.spinner('Generating response...'):
+            # Iterate through the stream
+            for event in stream:
+                if isinstance(event, ThreadMessageDelta):
+                    if isinstance(event.data.delta.content[0], TextDeltaBlock):
+                        # empty the container
+                        assistant_reply_box.empty()
+                        # add the new text
+                        assistant_reply += event.data.delta.content[0].text.value
+                        # remove any citations
+                        assistant_reply = re.sub("【.*?】", "", assistant_reply)
+                        # display the new text
+                        assistant_reply_box.markdown(assistant_reply)
+                        break  # break after the first word
+
+        # Continue streaming without the spinner
+        for event in stream:
+            # There are various types of streaming events
+            # See here: https://platform.openai.com/docs/api-reference/assistants-streaming/events
+
+            # Here, we only consider if there's a delta text
+            if isinstance(event, ThreadMessageDelta):
+                if isinstance(event.data.delta.content[0], TextDeltaBlock):
+                    # empty the container
+                    assistant_reply_box.empty()
+                    # add the new text
+                    assistant_reply += event.data.delta.content[0].text.value
+                    # remove any citations
+                    assistant_reply = re.sub("【.*?】", "", assistant_reply)
+                    # display the new text
+                    assistant_reply_box.markdown(assistant_reply)
+
+
+        # Once the stream is over, update chat history
+        st.session_state.chat_history.append({"role": "assistant",
+                                            "content": assistant_reply})
