@@ -1,5 +1,4 @@
 import streamlit as st
-import uuid
 
 from versobot_asst import versobot
 
