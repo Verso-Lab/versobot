@@ -11,23 +11,27 @@ PAGE_CONFIG = {
     "initial_sidebar_state": "collapsed",
 }
 
-SOURCE_TEXT_OPTIONS = [
-    "Attention Is All You Need",
-    "Fauci interview transcript",
-    "NHTSA 2022 crash data",
+SOURCE_TEXTS = [
+    {
+        "title": "Attention Is All You Need",
+        "caption": "The research paper that introduced the machine learning model architecture behind ChatGPT and others. [Read the document](https://arxiv.org/html/1706.03762v7). :blue-background[5,824 words]",
+        "assistant": "asst_vfC9bLBbNehj55nMvDfxyU70"
+    },
+    {
+        "title": "Fauci interview transcript",
+        "caption": "Dr. Anthony Fauci's ten-hour closed-door testimony in front of the COVID Select Subcommittee in January 2024. [Read the document](https://oversight.house.gov/wp-content/uploads/2024/05/Fauci-Part-1-Transcript.pdf). :blue-background[58,893 words]",
+        "assistant": "asst_Wspuondg32w51y2RfGOImVcf"
+    },
+    {
+        "title": "NHTSA 2022 crash data",
+        "caption": "A representative sample of 2022 U.S. vehicle collisions from the National Highway and Transit Safety Administration. [Read about the data](https://www.nhtsa.gov/crash-data-systems/crash-report-sampling-system). :blue-background[53,955 records]",
+        "assistant": "asst_0kwV7wS4CrsVFksneHZbhTgF"
+    }
 ]
 
-SOURCE_TEXT_CAPTIONS = [
-    "The research paper that introduced the machine learning model architecture behind ChatGPT and others. [Read the document](https://arxiv.org/html/1706.03762v7). :blue-background[5,824 words]",
-    "Dr. Anthony Fauci's ten-hour closed-door testimony in front of the COVID Select Subcommittee in January 2024. [Read the document](https://oversight.house.gov/wp-content/uploads/2024/05/Fauci-Part-1-Transcript.pdf). :blue-background[58,893 words]",
-    "A representative sample of 2022 U.S. vehicle collisions from the National Highway and Transit Safety Administration. [Read about the data](https://www.nhtsa.gov/crash-data-systems/crash-report-sampling-system). :blue-background[53,955 records]"
-]
-
-ASSISTANTS = {
-    "Attention Is All You Need": "asst_vfC9bLBbNehj55nMvDfxyU70",
-    "Fauci interview transcript": "asst_Wspuondg32w51y2RfGOImVcf",
-    "NHTSA 2022 crash data": "asst_0kwV7wS4CrsVFksneHZbhTgF",
-}
+SOURCE_TEXT_OPTIONS = [text["title"] for text in SOURCE_TEXTS]
+SOURCE_TEXT_CAPTIONS = [text["caption"] for text in SOURCE_TEXTS]
+ASSISTANTS = {text["title"]: text["assistant"] for text in SOURCE_TEXTS}
 
 
 # Functions
