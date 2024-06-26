@@ -6,22 +6,14 @@ from utils.config import set_up_page
 # Language-specific strings
 LANG_STRINGS = {
     "English": {
-        "sidebar_text": """
-        :gray-background[**Versobot**] is running on OpenAI's GPT-4o.
-        
-        Click the **✕** above to collapse this sidebar, or reset the chat with the button below.
-        """,
+        "sidebar_text": "**Versobot** is running on OpenAI's GPT-4o. Use the button below to reset the chat.",
         "chat_button_text": "Clear Chat",
         "initial_message": "Hi, I'm **Versobot!** How can I help?",
         "placeholder": "Chat with Versobot",
         "assistant_id": "asst_i5ylsjPx1CWwe0xJFOOQ80yC"
     },
     "Deutsch": {
-        "sidebar_text": """
-        :gray-background[**Versobot**] läuft auf OpenAIs GPT-4o.
-        
-        Klicken Sie auf das **✕** oben, um diese Seitenleiste zu minimieren, oder setzen Sie den Chat mit dem untenstehenden Button zurück.
-        """,
+        "sidebar_text": "**Versobot** läuft auf OpenAIs GPT-4o. Setzen Sie den Chat mit dem untenstehenden Button zurück.",
         "chat_button_text": "Chat löschen",
         "initial_message": "Hallo, ich bin **Versobot!** Wie kann ich helfen?",
         "placeholder": "Mit Versobot chatten",
