@@ -13,7 +13,8 @@ LANG_STRINGS = {
         """,
         "chat_button_text": "Chat löschen",
         "initial_message": "Hallo, ich bin **Versobot!** Wie kann ich helfen?",
-        "placeholder": "Mit Versobot chatten"
+        "placeholder": "Mit Versobot chatten",
+        "assistant_id": "asst_uXO7y5oCdYpj2RlxWC2tiRP6"
     },
     "English": {
         "sidebar_text": """
@@ -23,7 +24,8 @@ LANG_STRINGS = {
         """,
         "chat_button_text": "Clear Chat",
         "initial_message": "Hi, I'm **Versobot!** How can I help?",
-        "placeholder": "Chat with Versobot"
+        "placeholder": "Chat with Versobot",
+        "assistant_id": "asst_i5ylsjPx1CWwe0xJFOOQ80yC"
     }
 }
 
@@ -49,7 +51,7 @@ if chat_button(button_placeholder,
     st.rerun()
 else:
     versobot(
-        assistant_id="asst_uXO7y5oCdYpj2RlxWC2tiRP6",
+        assistant_id=LANG_STRINGS[lang]["assistant_id"],
         initial_message=LANG_STRINGS[lang]["initial_message"],
         placeholder=LANG_STRINGS[lang]["placeholder"]
     )
