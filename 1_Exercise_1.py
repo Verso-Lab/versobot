@@ -1,6 +1,7 @@
 import streamlit as st
 
 from components.chat import versobot
+from utils.session import initialize_session_states, chat_button, reset_chat
 
 
 # Constants
@@ -33,28 +34,6 @@ SOURCE_TEXT_OPTIONS = [text["title"] for text in SOURCE_TEXTS]
 SOURCE_TEXT_CAPTIONS = [text["caption"] for text in SOURCE_TEXTS]
 ASSISTANTS = {text["title"]: text["assistant"] for text in SOURCE_TEXTS}
 
-
-# Functions
-def initialize_session_states():
-    if 'chat' not in st.session_state:
-        st.session_state.chat = False
-
-    if 'source_text' not in st.session_state:
-        st.session_state.source_text = None
-
-    if 'initial_state' not in st.session_state:
-        st.session_state.initial_state = []
-
-
-def chat_button(button_placeholder, text, key=None, primary=False):
-    return button_placeholder.button(text,
-                                     type="primary" if primary else "secondary",
-                                     key=key)
-
-
-def reset_chat():
-    st.session_state.chat = False
-    st.session_state.initial_state = st.session_state.chat_history = []
 
 # Set up Streamlit app
 initialize_session_states()
