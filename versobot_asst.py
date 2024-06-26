@@ -1,6 +1,5 @@
 import streamlit as st
 import re
-
 from openai import OpenAI
 from openai.types.beta.assistant_stream_event import ThreadMessageDelta
 from openai.types.beta.threads.text_delta_block import TextDeltaBlock
