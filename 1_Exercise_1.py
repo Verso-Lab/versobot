@@ -1,6 +1,6 @@
 import streamlit as st
 
-from versobot_asst import versobot
+from components.chat import versobot
 
 
 # Constants
