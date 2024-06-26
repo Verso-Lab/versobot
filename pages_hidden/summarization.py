@@ -29,7 +29,9 @@ ASSISTANTS = {text["title"]: text["assistant"] for text in SOURCE_TEXTS}
 
 
 # Set up Streamlit app
-set_up_page("Summarization Exercise")
+set_up_page("Summarization Exercise",
+            layout="wide",
+            initial_sidebar_state="collapsed")
 initialize_session_states()
 
 # Page content
