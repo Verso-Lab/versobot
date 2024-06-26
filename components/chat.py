@@ -28,8 +28,8 @@ def display_chat_history():
             st.markdown(message["content"])
 
 
-def handle_user_query(client, thread_id, assistant_id):
-    if user_query := st.chat_input("Chat with GPT-4o"):
+def handle_user_query(placeholder, client, thread_id, assistant_id):
+    if user_query := st.chat_input(placeholder):
         with st.chat_message("user"):
             st.markdown(user_query)
         st.session_state.chat_history.append(
@@ -63,9 +63,9 @@ def stream_assistant_reply(client, thread_id, assistant_id):
             {"role": "assistant", "content": assistant_reply})
 
 
-def versobot(assistant_id, initial_message):
+def versobot(assistant_id, initial_message, placeholder="Chat with Versobot"):
     client = initialize_client()
     thread_id = create_thread(client)
     initialize_chat_history(initial_message)
     display_chat_history()
-    handle_user_query(client, thread_id, assistant_id)
+    handle_user_query(placeholder, client, thread_id, assistant_id)
