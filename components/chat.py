@@ -65,7 +65,9 @@ def stream_assistant_reply(client, thread_id, assistant_id):
 
 def versobot(assistant_id, initial_message, placeholder="Chat with Versobot"):
     client = initialize_client()
-    thread_id = create_thread(client)
+    if "thread_id" not in st.session_state:
+        st.session_state.thread_id = create_thread(client)
     initialize_chat_history(initial_message)
     display_chat_history()
-    handle_user_query(placeholder, client, thread_id, assistant_id)
+    handle_user_query(placeholder, client,
+                      st.session_state.thread_id, assistant_id)
