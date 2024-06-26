@@ -1,17 +1,10 @@
 import streamlit as st
-
 from components.chat import versobot
 from utils.session import initialize_session_states, chat_button, reset_chat
+from utils.config import set_up_page
 
 
 # Constants
-PAGE_CONFIG = {
-    "page_title": "Summarization Exercise • Versobot",
-    "page_icon": "assets/verso_icon.png",
-    "layout": "wide",
-    "initial_sidebar_state": "collapsed",
-}
-
 SOURCE_TEXTS = [
     {
         "title": "Attention Is All You Need",
@@ -36,9 +29,8 @@ ASSISTANTS = {text["title"]: text["assistant"] for text in SOURCE_TEXTS}
 
 
 # Set up Streamlit app
+set_up_page("Summarization Exercise")
 initialize_session_states()
-st.set_page_config(**PAGE_CONFIG)
-st.logo("assets/verso_logo.png", icon_image="assets/verso_icon.png")
 
 # Page content
 '''

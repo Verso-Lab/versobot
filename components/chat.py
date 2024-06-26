@@ -3,9 +3,9 @@ import re
 from openai import OpenAI
 from openai.types.beta.assistant_stream_event import ThreadMessageDelta
 from openai.types.beta.threads.text_delta_block import TextDeltaBlock
+from utils.config import get_openai_api_key
 
-OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
-
+OPENAI_API_KEY = get_openai_api_key()
 
 def initialize_client():
     return OpenAI(api_key=OPENAI_API_KEY)
