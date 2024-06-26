@@ -22,3 +22,5 @@ def reset_chat():
     """Reset chat session state"""
     st.session_state.chat = False
     st.session_state.initial_state = st.session_state.chat_history = []
+    if 'thread_id' in st.session_state:
+        del st.session_state.thread_id
