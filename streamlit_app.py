@@ -5,17 +5,6 @@ from utils.config import set_up_page
 
 # Language-specific strings
 LANG_STRINGS = {
-    "Deutsch": {
-        "sidebar_text": """
-        :gray-background[**Versobot**] läuft auf OpenAIs GPT-4o.
-        
-        Klicken Sie auf das **✕** oben, um diese Seitenleiste zu minimieren, oder setzen Sie den Chat mit dem untenstehenden Button zurück.
-        """,
-        "chat_button_text": "Chat löschen",
-        "initial_message": "Hallo, ich bin **Versobot!** Wie kann ich helfen?",
-        "placeholder": "Mit Versobot chatten",
-        "assistant_id": "asst_uXO7y5oCdYpj2RlxWC2tiRP6"
-    },
     "English": {
         "sidebar_text": """
         :gray-background[**Versobot**] is running on OpenAI's GPT-4o.
@@ -26,6 +15,17 @@ LANG_STRINGS = {
         "initial_message": "Hi, I'm **Versobot!** How can I help?",
         "placeholder": "Chat with Versobot",
         "assistant_id": "asst_i5ylsjPx1CWwe0xJFOOQ80yC"
+    },
+    "Deutsch": {
+        "sidebar_text": """
+        :gray-background[**Versobot**] läuft auf OpenAIs GPT-4o.
+        
+        Klicken Sie auf das **✕** oben, um diese Seitenleiste zu minimieren, oder setzen Sie den Chat mit dem untenstehenden Button zurück.
+        """,
+        "chat_button_text": "Chat löschen",
+        "initial_message": "Hallo, ich bin **Versobot!** Wie kann ich helfen?",
+        "placeholder": "Mit Versobot chatten",
+        "assistant_id": "asst_uXO7y5oCdYpj2RlxWC2tiRP6"
     }
 }
 
@@ -38,6 +38,7 @@ st.session_state.chat = True  # Start chat by default
 with st.sidebar:
     lang = st.selectbox("Language",
                         options=list(LANG_STRINGS.keys()),
+                        index=1,
                         label_visibility="collapsed",
                         on_change=reset_chat)
     LANG_STRINGS[lang]["sidebar_text"]
