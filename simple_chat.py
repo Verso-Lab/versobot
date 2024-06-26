@@ -5,7 +5,7 @@ from utils.config import set_up_page
 
 
 # App setup
-set_up_page("Chat", layout="wide")
+set_up_page("Chat")
 initialize_session_states()
 
 versobot(assistant_id="asst_i5ylsjPx1CWwe0xJFOOQ80yC",
