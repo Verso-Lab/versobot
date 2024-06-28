@@ -6,7 +6,7 @@ def set_up_page(page_title, layout="centered", initial_sidebar_state="auto"):
     Set up the Streamlit page configuration and display the Verso logo.
 
     Args:
-        page_title (str): The title of the page.
+        page_title (str): The page title, which displays between "Versobot" and "· Streamlit".
         layout (str, optional): The layout of the page. Defaults to "centered".
         initial_sidebar_state (str, optional): The initial state of the sidebar. Defaults to "auto".
 
@@ -14,7 +14,7 @@ def set_up_page(page_title, layout="centered", initial_sidebar_state="auto"):
         None
     """
     page_config = {
-        "page_title": f"{page_title} • Versobot",
+        "page_title": f"Versobot {page_title}",
         "page_icon": "assets/verso_icon_with_bg.png",
         "layout": layout,
         "initial_sidebar_state": initial_sidebar_state,
