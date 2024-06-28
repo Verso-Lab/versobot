@@ -2,6 +2,17 @@ import streamlit as st
 
 
 def set_up_page(page_title, layout="centered", initial_sidebar_state="auto"):
+    """
+    Set up the Streamlit page configuration and display the Verso logo.
+
+    Args:
+        page_title (str): The title of the page.
+        layout (str, optional): The layout of the page. Defaults to "centered".
+        initial_sidebar_state (str, optional): The initial state of the sidebar. Defaults to "auto".
+
+    Returns:
+        None
+    """
     page_config = {
         "page_title": f"{page_title} • Versobot",
         "page_icon": "assets/verso_icon_with_bg.png",
