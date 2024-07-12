@@ -36,6 +36,8 @@ def handle_user_query(placeholder, client, thread_id, assistant_id):
             {"role": "user", "content": user_query})
         client.beta.threads.messages.create(
             thread_id=thread_id, role="user", content=user_query)
+        # Store the latest user prompt in the session state
+        st.session_state.latest_user_prompt = user_query
         stream_assistant_reply(client, thread_id, assistant_id)
 
 
