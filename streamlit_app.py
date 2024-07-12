@@ -2,7 +2,7 @@ import streamlit as st
 from components.chat import versobot
 from utils.session import initialize_session_states, chat_button, reset_chat
 from utils.config import set_up_page
-from utils.prompt_tips import get_prompt_tips  # We'll update this function later
+from versobot.components.prompt_tips import get_prompt_tips
 
 # Language-specific strings
 LANG_STRINGS = {
@@ -45,26 +45,30 @@ with st.sidebar:
                         label_visibility="collapsed",
                         on_change=reset_chat)
     st.markdown(LANG_STRINGS[lang]["sidebar_text"])
+    
+    # Create placeholders for the button and prompt tips
     button_placeholder = st.empty()
+    tips_placeholder = st.empty()
+    
+    # Always show the "Clear Chat" button
+    if chat_button(button_placeholder,
+                   LANG_STRINGS[lang]["chat_button_text"],
+                   primary=True):
+        reset_chat()
+        st.rerun()
     
     # Add button for prompt tips
     if st.button(LANG_STRINGS[lang]["prompt_tips_button"]):
         if st.session_state.latest_user_prompt:
             tips = get_prompt_tips(st.session_state.latest_user_prompt, lang)
-            st.markdown(LANG_STRINGS[lang]["prompt_tips_header"])
-            st.write(tips)
+            tips_placeholder.markdown(LANG_STRINGS[lang]["prompt_tips_header"])
+            tips_placeholder.write(tips)
         else:
-            st.write(LANG_STRINGS[lang]["no_prompt_message"])
+            tips_placeholder.write(LANG_STRINGS[lang]["no_prompt_message"])
 
 # Chat interface
-if chat_button(button_placeholder,
-               LANG_STRINGS[lang]["chat_button_text"],
-               primary=True):
-    reset_chat()
-    st.rerun()
-else:
-    versobot(
-        assistant_id=LANG_STRINGS[lang]["assistant_id"],
-        initial_message=LANG_STRINGS[lang]["initial_message"],
-        placeholder=LANG_STRINGS[lang]["placeholder"]
-    )
+versobot(
+    assistant_id=LANG_STRINGS[lang]["assistant_id"],
+    initial_message=LANG_STRINGS[lang]["initial_message"],
+    placeholder=LANG_STRINGS[lang]["placeholder"]
+)
