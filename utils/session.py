@@ -24,3 +24,4 @@ def reset_chat():
     st.session_state.initial_state = st.session_state.chat_history = []
     if 'thread_id' in st.session_state:
         del st.session_state.thread_id
+    st.session_state.latest_user_prompt = ""
