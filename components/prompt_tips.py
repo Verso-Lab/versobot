@@ -1,8 +1,9 @@
 import openai
 from utils.config import get_openai_api_key
+from components.chat import initialize_client
 
 # Initialize the OpenAI client
-client = openai.OpenAI(api_key=get_openai_api_key())
+client = initialize_client()
 
 def get_prompt_tips(user_prompt, lang):
     """
@@ -41,7 +42,7 @@ def get_prompt_tips(user_prompt, lang):
     }
 
     response = client.chat.completions.create(
-        model="gpt-4o",  # or whichever model you prefer
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": system_messages[lang]},
             {"role": "user", "content": user_messages[lang]}
@@ -50,9 +51,3 @@ def get_prompt_tips(user_prompt, lang):
     )
 
     return response.choices[0].message.content
-
-# Example usage:
-# tips_en = get_prompt_tips("What are the main economic challenges facing the EU in 2023?", "English")
-# tips_de = get_prompt_tips("Was sind die wichtigsten wirtschaftlichen Herausforderungen für die EU im Jahr 2023?", "Deutsch")
-# print(tips_en)
-# print(tips_de)
