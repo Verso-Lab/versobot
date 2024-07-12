@@ -1,8 +1,8 @@
 import streamlit as st
 from components.chat import versobot
+from components.prompt_tips import get_prompt_tips
 from utils.session import initialize_session_states, chat_button, reset_chat
 from utils.config import set_up_page
-from versobot.components.prompt_tips import get_prompt_tips
 
 # Language-specific strings
 LANG_STRINGS = {
@@ -47,18 +47,22 @@ with st.sidebar:
     st.markdown(LANG_STRINGS[lang]["sidebar_text"])
     
     # Create placeholders for the button and prompt tips
-    button_placeholder = st.empty()
+    chat_button_placeholder = st.empty()
+    
+    st.divider()
+    
+    tips_button_placeholder = st.empty()
     tips_placeholder = st.empty()
     
     # Always show the "Clear Chat" button
-    if chat_button(button_placeholder,
+    if chat_button(chat_button_placeholder,
                    LANG_STRINGS[lang]["chat_button_text"],
                    primary=True):
         reset_chat()
         st.rerun()
     
     # Add button for prompt tips
-    if st.button(LANG_STRINGS[lang]["prompt_tips_button"]):
+    if tips_button_placeholder.button(LANG_STRINGS[lang]["prompt_tips_button"]):
         if st.session_state.latest_user_prompt:
             tips = get_prompt_tips(st.session_state.latest_user_prompt, lang)
             tips_placeholder.markdown(LANG_STRINGS[lang]["prompt_tips_header"])
